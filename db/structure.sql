@@ -145,6 +145,38 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 
 
 --
+-- Name: learnings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.learnings (
+    id bigint NOT NULL,
+    name character varying,
+    comment text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: learnings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.learnings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: learnings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.learnings_id_seq OWNED BY public.learnings.id;
+
+
+--
 -- Name: menus; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -314,6 +346,45 @@ ALTER SEQUENCE public.rails_admin_settings_id_seq OWNED BY public.rails_admin_se
 
 
 --
+-- Name: results; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.results (
+    id bigint NOT NULL,
+    learning_id bigint,
+    text_id bigint,
+    level character varying,
+    m1 numeric,
+    m2 numeric,
+    m3 numeric,
+    m4 numeric,
+    m5 numeric,
+    m6 numeric,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: results_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.results_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: results_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.results_id_seq OWNED BY public.results.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -397,6 +468,74 @@ CREATE SEQUENCE public.simple_captcha_data_id_seq
 --
 
 ALTER SEQUENCE public.simple_captcha_data_id_seq OWNED BY public.simple_captcha_data.id;
+
+
+--
+-- Name: sites; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sites (
+    id bigint NOT NULL,
+    name character varying,
+    url character varying,
+    foundation_year integer,
+    comment text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sites_id_seq OWNED BY public.sites.id;
+
+
+--
+-- Name: texts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.texts (
+    id bigint NOT NULL,
+    content text,
+    site_id bigint,
+    name character varying,
+    level character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: texts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.texts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: texts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.texts_id_seq OWNED BY public.texts.id;
 
 
 --
@@ -495,6 +634,13 @@ ALTER TABLE ONLY public.friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: learnings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.learnings ALTER COLUMN id SET DEFAULT nextval('public.learnings_id_seq'::regclass);
+
+
+--
 -- Name: menus id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -523,6 +669,13 @@ ALTER TABLE ONLY public.rails_admin_settings ALTER COLUMN id SET DEFAULT nextval
 
 
 --
+-- Name: results id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.results ALTER COLUMN id SET DEFAULT nextval('public.results_id_seq'::regclass);
+
+
+--
 -- Name: seos id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -534,6 +687,20 @@ ALTER TABLE ONLY public.seos ALTER COLUMN id SET DEFAULT nextval('public.seos_id
 --
 
 ALTER TABLE ONLY public.simple_captcha_data ALTER COLUMN id SET DEFAULT nextval('public.simple_captcha_data_id_seq'::regclass);
+
+
+--
+-- Name: sites id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sites ALTER COLUMN id SET DEFAULT nextval('public.sites_id_seq'::regclass);
+
+
+--
+-- Name: texts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.texts ALTER COLUMN id SET DEFAULT nextval('public.texts_id_seq'::regclass);
 
 
 --
@@ -583,6 +750,14 @@ ALTER TABLE ONLY public.friendly_id_slugs
 
 
 --
+-- Name: learnings learnings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.learnings
+    ADD CONSTRAINT learnings_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: menus menus_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -615,6 +790,14 @@ ALTER TABLE ONLY public.rails_admin_settings
 
 
 --
+-- Name: results results_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.results
+    ADD CONSTRAINT results_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -636,6 +819,22 @@ ALTER TABLE ONLY public.seos
 
 ALTER TABLE ONLY public.simple_captcha_data
     ADD CONSTRAINT simple_captcha_data_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sites sites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sites
+    ADD CONSTRAINT sites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: texts texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.texts
+    ADD CONSTRAINT texts_pkey PRIMARY KEY (id);
 
 
 --
@@ -760,10 +959,31 @@ CREATE UNIQUE INDEX index_rails_admin_settings_on_ns_and_key ON public.rails_adm
 
 
 --
+-- Name: index_results_on_learning_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_results_on_learning_id ON public.results USING btree (learning_id);
+
+
+--
+-- Name: index_results_on_text_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_results_on_text_id ON public.results USING btree (text_id);
+
+
+--
 -- Name: index_seos_on_seoable_id_and_seoable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_seos_on_seoable_id_and_seoable_type ON public.seos USING btree (seoable_id, seoable_type);
+
+
+--
+-- Name: index_texts_on_site_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_texts_on_site_id ON public.texts USING btree (site_id);
 
 
 --
@@ -796,6 +1016,30 @@ ALTER TABLE ONLY public.menus_pages
 
 
 --
+-- Name: texts fk_rails_34ff70132d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.texts
+    ADD CONSTRAINT fk_rails_34ff70132d FOREIGN KEY (site_id) REFERENCES public.sites(id);
+
+
+--
+-- Name: results fk_rails_37b9aeea01; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.results
+    ADD CONSTRAINT fk_rails_37b9aeea01 FOREIGN KEY (text_id) REFERENCES public.texts(id);
+
+
+--
+-- Name: results fk_rails_d05cd5c1e8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.results
+    ADD CONSTRAINT fk_rails_d05cd5c1e8 FOREIGN KEY (learning_id) REFERENCES public.learnings(id);
+
+
+--
 -- Name: menus_pages fk_rails_d62728888b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -819,6 +1063,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180321220144'),
 ('20180321220145'),
 ('20180321220146'),
-('20180321220147');
+('20180321220147'),
+('20180321220148'),
+('20180321220149'),
+('20180321220150'),
+('20180321220151');
 
 

@@ -37,6 +37,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'better_errors', github: 'charliesome/better_errors'
   gem 'pry-rails'
+  gem 'annotate'
   gem 'listen'
   
 
