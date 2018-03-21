@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: readability_development
+  pool: 5
+  host: 'localhost'
+  username: readability
+  password: readability
+  template: template0
