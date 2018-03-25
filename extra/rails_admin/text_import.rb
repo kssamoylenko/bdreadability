@@ -32,7 +32,7 @@ module RailsAdmin
               end
             end
             redirect_to '/admin/text', flash: {success: ret}
-          rescue => e
+          rescue Exception => e
             redirect_to '/admin/text', flash: {error: e.message}
           end
         end
