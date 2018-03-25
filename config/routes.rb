@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Ckeditor::Engine => '/ckeditor'
+  get 'texts', to: 'texts#index'
+  post 'learnings', to: 'learnings#create'
 
   #get 'contacts' => 'contacts#new', as: :contacts
   #post 'contacts' => 'contacts#create', as: :create_contacts
