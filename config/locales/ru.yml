@@ -11,3 +11,5 @@ ru:
     actions:
       text_import:
         menu: Импорт
+      delete_all:
+        menu: Удалить всё

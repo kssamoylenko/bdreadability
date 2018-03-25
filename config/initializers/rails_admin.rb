@@ -1,5 +1,6 @@
 require 'rails_admin/custom_show_in_app'
 require 'rails_admin/text_import'
+require 'rails_admin/delete_all'
 RailsAdminSettings.track_history!
 
 RailsAdmin.config do |config|
@@ -38,9 +39,7 @@ RailsAdmin.config do |config|
         ['Text'].include? bindings[:abstract_model].model_name
       end
     end
-
-    history_index
-    history_show
+    delete_all
 
     nested_set do
       visible do
@@ -67,6 +66,7 @@ RailsAdmin.config do |config|
   config.excluded_models = [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
       'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'News', 'ContactMessage', 'RailsAdminSettings::Setting',
   ]
 end
 

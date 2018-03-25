@@ -16,7 +16,6 @@ module RailsAdmin
           proc do
             begin
               categoties = %w[1_basic 2_middle 3_hard]
-              ret = ''
               categoties.each do | category |
                 dir = Rails.root.join('tmp', 'readability_class', category)
                 Dir.foreach(dir) do | site_name |
@@ -29,10 +28,9 @@ module RailsAdmin
                     text.level = category
                     text.save!
                   end
-                  ret += site_name
                 end
               end
-              redirect_to '/admin/text', flash: {success: ret}
+              redirect_to '/admin/text', flash: {success: "Успешно загружено"}
             rescue=> e
               redirect_to '/admin/text', flash: {error: e.message}
             end
