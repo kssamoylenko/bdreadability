@@ -12,6 +12,8 @@
 #
 
 class Text < ApplicationRecord
+  extend Enumerize
+  enumerize :level, in: %i[1_basic 2_middle 3_hard]
   belongs_to :site
   has_many :results, dependent: :destroy
 end

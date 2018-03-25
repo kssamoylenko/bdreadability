@@ -17,6 +17,8 @@
 #
 
 class Result < ApplicationRecord
+  extend Enumerize
+  enumerize :level, in: %i[1_basic 2_middle 3_hard]
   belongs_to :learning
   belongs_to :text
 end

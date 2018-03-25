@@ -19,6 +19,8 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
 
+gem 'enumerize'
+
 
 gem 'cloner'
 gem 'puma'

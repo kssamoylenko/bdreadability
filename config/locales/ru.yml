@@ -7,3 +7,7 @@ ru:
     attributes:
       item:
         price: Цена
+  admin:
+    actions:
+      text_import:
+        menu: Импорт
