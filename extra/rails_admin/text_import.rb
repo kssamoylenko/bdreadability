@@ -14,26 +14,28 @@ module RailsAdmin
 
         register_instance_option :controller do
           proc do
-            categoties = %w[1_basic 2_middle 3_hard]
-            ret = ''
-            categoties.each do | category |
-              dir = Rails.root.join('tmp', 'readability_class', category)
-              Dir.foreach(dir) do | site_name |
-                next if site_name.in? %w[. ..]
-                site = Site.find_or_create_by(name: site_name)
-                subdir = Rails.root.join('tmp', 'readability_class', category, site_name, '*.txt')
-                Dir.glob(subdir).each do | path |
-                  text = site.texts.find_or_initialize_by(name: File.basename(path))
-                  text.content = open(path).read
-                  text.level = category
-                  text.save!
+            begin
+              categoties = %w[1_basic 2_middle 3_hard]
+              ret = ''
+              categoties.each do | category |
+                dir = Rails.root.join('tmp', 'readability_class', category)
+                Dir.foreach(dir) do | site_name |
+                  next if site_name.in? %w[. ..]
+                  site = Site.find_or_create_by(name: site_name)
+                  subdir = Rails.root.join('tmp', 'readability_class', category, site_name, '*.txt')
+                  Dir.glob(subdir).each do | path |
+                    text = site.texts.find_or_initialize_by(name: File.basename(path))
+                    text.content = open(path).read
+                    text.level = category
+                    text.save!
+                  end
+                  ret += site_name
                 end
-                ret += site_name
               end
+              redirect_to '/admin/text', flash: {success: ret}
+            rescue=> e
+              redirect_to '/admin/text', flash: {error: e.message}
             end
-            redirect_to '/admin/text', flash: {success: ret}
-          rescue Exception => e
-            redirect_to '/admin/text', flash: {error: e.message}
           end
         end
 
