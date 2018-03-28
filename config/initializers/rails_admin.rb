@@ -5,6 +5,7 @@ RailsAdminSettings.track_history!
 
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
+  config.total_columns_width=2000
 
   ## == Devise ==
   # this is required if not using cancan
@@ -15,7 +16,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
 
   ## == Cancan ==
-  config.authorize_with :cancancan2
+    config.authorize_with :cancan
 
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 

@@ -13,3 +13,13 @@ ru:
         menu: Импорт
       delete_all:
         menu: Удалить всё
+  activerecord:
+    attributes:
+      result:
+        m1: FRE
+        m2: FKG
+        m3: SMOG
+        m4: CLI
+        m5: DCH
+        m6: GF
+

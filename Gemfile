@@ -6,7 +6,7 @@ gem 'pg', '~> 0.21.0'
 gem 'sass'
 
 gem 'rocket_cms_activerecord'
-gem 'rails_admin', github: 'crowdtask/rails_admin'
+gem 'rails_admin', github: 'rs-pro/rails_admin'
 gem 'friendly_id', github: 'norman/friendly_id'
 
 gem 'slim'
