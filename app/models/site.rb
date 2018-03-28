@@ -13,4 +13,9 @@
 
 class Site < ApplicationRecord
   has_many :texts, dependent: :destroy
+  rails_admin do
+    list do
+      exclude_fields :texts
+    end
+  end
 end

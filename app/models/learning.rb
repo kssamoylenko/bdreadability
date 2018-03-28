@@ -12,4 +12,7 @@
 class Learning < ApplicationRecord
   has_many :results, dependent: :destroy
   accepts_nested_attributes_for :results
+  rails_admin do
+    exclude_fields :results
+  end
 end
